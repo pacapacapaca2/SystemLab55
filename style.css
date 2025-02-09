@@ -1,0 +1,329 @@
+* {
+    box-sizing: border-box;
+}
+
+div {
+    border: 1px solid brown;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#general {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+#right-block {
+    flex: 2 60%;
+    height: 100%;
+}
+
+#left-block {
+    flex: 1 40%;
+    height: 100%;
+}
+
+#exe {
+    height: 30%;
+    position: relative;
+}
+
+#list-exe {
+    padding: 5px 10px;
+    overflow: auto;
+    position: absolute;
+    top: 1.5em;
+    bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.exe-icons {
+    display: inline-block;
+    margin: 5px 10px;
+}
+
+#context {
+    height: 70%;
+    position: relative;
+}
+
+#text-context {
+    position: absolute;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    border-left: 0;
+    border-right: 0;
+}
+
+#actions-process {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#actions-program {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+#system-dispatcher {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+#list-program-header, #dispatcher-process {
+    border-left: 0;
+    border-right: 0;
+}
+
+#bookmarks-of-context {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.header-of-block {
+    text-align: center;
+    height: 1.5em;
+}
+
+
+.exe-icon-in-bookmark {
+    display: inline-block;
+    border-left: 3px solid darkolivegreen;
+    border-right: 3px solid darkolivegreen;
+    zoom: 0.7;
+    margin-bottom: -5px;
+    opacity: 0.3;
+}
+
+.exe-icon-in-bookmark:hover {
+    opacity: 1;
+}
+
+/*button - stop process*/
+.stop-process {
+    cursor: pointer;
+    background-color: chartreuse;
+    margin: 2px 0;
+    padding: 2px 0 2px 5px;
+    text-align: center;
+    /*border: groove chocolate;*/
+}
+
+.stop-process:hover {
+    background-color: greenyellow;
+}
+
+/*class for text count thread and memory size*/
+.count-tread-memory {
+    margin: 0;
+    padding: 2px 0 2px 5px;
+}
+
+/*block for hidden list of modules*/
+
+.title-list-modules {
+    height: 20px;
+    background-color: coral;
+}
+
+/*block with list modules*/
+.module-with-list {
+    overflow: auto;
+    display: block;
+    white-space: nowrap;
+    /*height: 50px;*/
+}
+
+/*block modules + hidden-block*/
+.module-and-title-block {
+    /*height: 30%;*/
+    position: relative;
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+}
+
+/*general block - ul*/
+#ul-modules {
+    margin: 0;
+    padding: 0;
+}
+
+/*item - li - module*/
+.one-module {
+    display: inline-block;
+    padding: 5px 20px;
+    background-color: burlywood;
+}
+
+.one-module:hover {
+    background-color: blanchedalmond;
+}
+
+/*outer block for table*/
+.block-virtual-memory {
+    overflow: auto;
+}
+
+.table-virtual-memory {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-virtual-memory th, td {
+    border: 1px solid black;
+}
+
+/*block for 3 diagrams*/
+
+.block-choose-device {
+    display: flex;
+    flex-direction: row;
+}
+
+.option-device {
+    flex-grow: 1;
+    cursor: pointer;
+    background-color: burlywood;
+}
+
+/*highlight first item*/
+.option-device:first-child {
+    background-color: green;
+}
+
+.option-device:hover {
+    background-color: chocolate;
+}
+
+.outer-block-for-canvas {
+    flex-grow: 1;
+}
+
+/*interrupt button*/
+#interrupt-button {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#general-for-visual-tact {
+    position: absolute;
+    top: 1.5em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#tact-cube, #tact-program {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.one-tact-cube {
+    flex-grow: 1;
+}
+
+.one-program {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.one-tact-name-program, .one-tact-ico-program {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.one-tact-ico-program {
+    cursor: pointer;
+}
+
+.one-tact-name-program, .one-tact-ico-program {
+    flex-grow: 1;
+}
+
+#name-program-visual {
+    background-color: #2477F1;
+    font-weight: bold;
+    color: white;
+    border-bottom: 0;
+}
+
+#program-body {
+    position: relative;
+    flex-grow: 1;
+    background-image: url(img_background_program/body_line.jpg);
+    background-repeat: repeat-y;
+    background-size: 100% 100%;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+#header-body-program {
+    background-image: url("img_background_program/header.jpg");
+    height: 2em;
+    background-size: 100% 100%;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+#footer-body-program {
+    background-image: url("img_background_program/footer.jpg");
+    height: 2.5em;
+    background-size: 100% 100%;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+#program-code {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 20px;
+    right: 20px;
+    height: 100%;
+    /*margin: 5px 20px;*/
+    border: 0;
+    overflow: hidden;
+}
+
+.code-string {
+    margin: 0;
+    padding: 0;
+    color: azure;
+    font-family: Consolas, monaco, monospace;
+}
