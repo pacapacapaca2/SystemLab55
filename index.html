@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>FCFS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <script src="frameworks/canvasjs.min.js"></script>
+</head>
+<body>
+<div id="general">
+    <div id="left-block">
+        <div id="exe">
+            <div class="header-of-block" id="list-program-header"><span class="header-text">Список программ</span></div>
+            <div id="list-exe"></div>
+        </div>
+        <div id="context">
+            <div class="header-of-block" id="dispatcher-process">Диспетчер процессов</div>
+            <div id="bookmarks-of-context"></div>
+            <div id="text-context"></div>
+        </div>
+    </div>
+    <div id="right-block">
+        <div id="actions-process">
+            <div class="header-of-block">
+                <span class="header-text">Визуализация тактов процессора</span>
+                <input id="interrupt-button" type="button" value="Сделать прерывание"/>
+            </div>
+            <div id="general-for-visual-tact">
+                    <div id="tact-cube">
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                        <div class="one-tact-cube"></div>
+                    </div>
+                    <div id="tact-program">
+                        <div class="one-program">
+                            <div class="one-tact-name-program"></div>
+                            <div class="one-tact-ico-program"></div>
+                        </div>
+                        <div class="one-program">
+                            <div class="one-tact-name-program"></div>
+                            <div class="one-tact-ico-program"></div>
+                        </div>
+                        <div class="one-program">
+                            <div class="one-tact-name-program"></div>
+                            <div class="one-tact-ico-program"></div>
+                        </div>
+                        <div class="one-program">
+                            <div class="one-tact-name-program"></div>
+                            <div class="one-tact-ico-program"></div>
+                        </div>
+                        <div class="one-program">
+                            <div class="one-tact-name-program"></div>
+                            <div class="one-tact-ico-program"></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div id="actions-program">
+            <div class="header-of-block" id="name-program-visual"></div>
+            <div id="header-body-program"></div>
+            <div id="program-body">
+                <div id="program-code"></div>
+            </div>
+            <div id="footer-body-program"></div>
+        </div>
+        <div id="system-dispatcher">
+            <div class="header-of-block"><span class="header-text">Диспетчер устройств ПК</span></div>
+            <div class="block-choose-device">
+                <div class="option-device">Жесткий диск</div>
+                <div class="option-device">Оперативная память</div>
+                <div class="option-device">Процессор</div>
+                <div class="option-device">Swap</div>
+            </div>
+            <div id="diagram-physic-memory" class="outer-block-for-canvas" style="display: block"></div>
+            <div id="diagram-ram-memory" class="outer-block-for-canvas" style="display: none"></div>
+            <div id="diagram-processor-memory" class="outer-block-for-canvas" style="display: none"></div>
+            <div id="diagram-swap-memory" class="outer-block-for-canvas" style="display: none"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
