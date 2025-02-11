@@ -109,6 +109,7 @@ html, body {
     height: 1.5em;
 }
 
+
 .exe-icon-in-bookmark {
     display: inline-block;
     border-left: 3px solid darkolivegreen;
@@ -122,46 +123,57 @@ html, body {
     opacity: 1;
 }
 
+/*button - stop process*/
 .stop-process {
     cursor: pointer;
     background-color: chartreuse;
     margin: 2px 0;
     padding: 2px 0 2px 5px;
     text-align: center;
+    /*border: groove chocolate;*/
 }
 
 .stop-process:hover {
     background-color: greenyellow;
 }
 
+/*class for text count thread and memory size*/
 .count-tread-memory {
     margin: 0;
     padding: 2px 0 2px 5px;
 }
+
+/*block for hidden list of modules*/
 
 .title-list-modules {
     height: 20px;
     background-color: coral;
 }
 
+/*block with list modules*/
 .module-with-list {
     overflow: auto;
     display: block;
     white-space: nowrap;
+    /*height: 50px;*/
 }
 
+/*block modules + hidden-block*/
 .module-and-title-block {
+    /*height: 30%;*/
     position: relative;
     width: 100%;
     border-left: 0;
     border-right: 0;
 }
 
+/*general block - ul*/
 #ul-modules {
     margin: 0;
     padding: 0;
 }
 
+/*item - li - module*/
 .one-module {
     display: inline-block;
     padding: 5px 20px;
@@ -172,6 +184,7 @@ html, body {
     background-color: blanchedalmond;
 }
 
+/*outer block for table*/
 .block-virtual-memory {
     overflow: auto;
 }
@@ -186,6 +199,8 @@ html, body {
     border: 1px solid black;
 }
 
+/*block for 3 diagrams*/
+
 .block-choose-device {
     display: flex;
     flex-direction: row;
@@ -197,6 +212,7 @@ html, body {
     background-color: burlywood;
 }
 
+/*highlight first item*/
 .option-device:first-child {
     background-color: green;
 }
@@ -209,6 +225,7 @@ html, body {
     flex-grow: 1;
 }
 
+/*interrupt button*/
 #interrupt-button {
     box-sizing: border-box;
     display: inline-block;
@@ -255,6 +272,10 @@ html, body {
     cursor: pointer;
 }
 
+.one-tact-name-program, .one-tact-ico-program {
+    flex-grow: 1;
+}
+
 #name-program-visual {
     background-color: #2477F1;
     font-weight: bold;
@@ -295,6 +316,7 @@ html, body {
     left: 20px;
     right: 20px;
     height: 100%;
+    /*margin: 5px 20px;*/
     border: 0;
     overflow: hidden;
 }
