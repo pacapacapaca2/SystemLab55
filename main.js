@@ -1,6 +1,3 @@
-/**
- * Created by artamonov on 27.11.15.
- */
 var objHelper = new Helper();
 
 var allPrograms = {
