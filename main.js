@@ -115,16 +115,6 @@ var allPrograms = {
             modules: ["shdocvw.dll", "shell32.dll", "shimgvw.dll", "shlwapi.dll", "shmedia.dll", "tapi32.dll", "themeui.dll", "twext.dll", "urlmon.dll", "user32.dll", "userenv.dll", "usp10.dll"]
         }
     },
-    school: {
-        src: 'img_for_exe/school-icon.png',
-        name: 'School',
-        context: {
-            numberThread: 4,
-            sizeMemory: 78,
-            countTact: 12,
-            modules: ["uxtheme.dll", "version.dll", "dmaud.drv", "webcheck.dll", "winhttp.dll", "wininet.dll", "winmm.dll", "inspool.drv", "winsta.dll"]
-        }
-    },
     viewerDocument: {
         src: 'img_for_exe/viewer-document-icon.png',
         name: 'Viewer document',
