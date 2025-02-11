@@ -46,7 +46,7 @@ var allPrograms = {
     },
     codeBlock: {
         src: 'img_for_exe/code-block.png',
-        name: 'Clock',
+        name: 'CodeBlock',
         context: {
             numberThread: 23,
             sizeMemory: 122,
@@ -56,7 +56,7 @@ var allPrograms = {
     },
     excel: {
         src: 'img_for_exe/excel-icon.png',
-        name: 'Code block',
+        name: 'Excel',
         context: {
             numberThread: 3,
             sizeMemory: 165,
@@ -180,16 +180,13 @@ var hardDisc = {
 };
 
 window.addEventListener('load', function () {
-    // add for all program context->virtual memory
     objHelper.addForProgramVirtualMemory();
-    // add image for all program
     objHelper.addObjImageForAllProgram();
     var objVisual = new Visual();
     objVisual.init();
 });
 
 function Visual() {
-    // style for pie
     var templateStyleForPie = {
         title: {
             text: ""
@@ -209,39 +206,25 @@ function Visual() {
                 type: "pie",
                 showInLegend: true,
                 toolTipContent: "{y} (mb) {indexLabel} - <strong>#percent%</strong>"
-                //dataPoints: genericDataPoints
             }
         ]
     };
-    // array block options for - event - click
     var arrayBlockOptions;
-    //counter for unique ID
     var idProcess = 1;
-    // object Ram and Swap
     var objRam, objSwap;
-    // object for animation arrayAllProcess
     var objAnimationTact;
-    // object animation work program
     var objAnimationProgram;
-    // array of all process
     var arrayAllProcess = [];
     arrayAllProcess.deleteProcess = function (process) {
         for (var incProcess = 0; incProcess < this.length; incProcess++) {
             if (this[incProcess].id === process.id) {
-                // console.log('будет удален - > ' + incProcess);
-                // console.log(this[incProcess]);
-                // console.log(this);
                 this.splice(incProcess, 1);
                 return;
             }
         }
     };
-    // timer
     var timerForProcess = 0;
-    // active ico from bookmarks
     var activeIcoForShowContext;
-    ///////////////////////////////////////////////////////////
-    // class for Ram and Swap
     function Ram(allSpace) {
         this.allSpace = allSpace;
         this.process = [];
@@ -256,18 +239,11 @@ function Visual() {
         }
     };
     Ram.prototype.redrawDiagram = function () {
-        // check RAM OR SWAP
         if (this.constructor === Ram) {
-            // redraw RAM
             arrayBlockOptions[1].click();
-            //  console.log('redraw - RAM');
-            //  console.log(this);
-
         } else if (this.constructor === Swap) {
-            // redraw swap
             arrayBlockOptions[3].click();
             showSwapMemory();
-            //  console.log('redraw - SWAP');
         }
     };
     Ram.prototype.setProcess = function (process) {
@@ -275,11 +251,9 @@ function Visual() {
         if (this.isFreeSpace(sizeProcess)) {
             this.process.push(process);
             this.busySpace += sizeProcess;
-            // was add
             this.redrawDiagram();
             return true;
         } else {
-            // was not add
             return false;
         }
     };
@@ -287,15 +261,12 @@ function Visual() {
         var countProcess = this.process.length;
         for (var incProcess = 0; incProcess < countProcess; incProcess++) {
             if (this.process[incProcess].id === process.id) {
-                // decrease busy space
                 this.busySpace -= process.context.sizeMemory;
                 this.process.splice(incProcess, 1);
-                // was delete
                 this.redrawDiagram();
                 return true;
             }
         }
-        // was not delete
         return false;
     };
 
@@ -305,27 +276,16 @@ function Visual() {
 
     Swap.inheritsFrom(Ram);
 
-    //////////////////////////////////////////////////////////////
-    // construct Visual
     this.init = function () {
-        // show all programs icons
         addAllTagsPrograms();
-        // add event listener for option block of dispatcher
         addEventListenerForDispatcherDevice();
-        // show HDD menu - first
         showHddMemory();
         var generalOuterBlock = document.getElementById('system-dispatcher');
         arrayBlockOptions = generalOuterBlock.getElementsByClassName('option-device');
-        // RAM - 8192 - size RAM memory
         objRam = new Ram(8192);
-        //  console.log(objRam);
-        // SWAP
         objSwap = new Swap(hardDisc.getFreeSpace());
-        //  console.log(objSwap);
-        // object for animation tact
         objAnimationTact = new DrawingTactAndWorkProgram();
         objAnimationTact.init();
-        // object animation work of program
         objAnimationProgram = new AnimationWorkOfProgram();
 
     };
@@ -348,7 +308,6 @@ function Visual() {
         };
 
         var animationWorkProgram = function () {
-           // console.log(programName);
             if (codeBlock.firstElementChild){
                 codeBlock.removeChild(codeBlock.firstElementChild);
             } else{
@@ -359,7 +318,6 @@ function Visual() {
         this.endAnimation = function () {
             codeBlock.innerHTML = '';
             elementNameProgram.innerHTML = '';
-           // console.log('stopppp');
             clearInterval(pointerToInterval);
         };
     }
@@ -377,7 +335,6 @@ function Visual() {
         var interruptTactColor = '#FF0000';
 
         this.init = function () {
-            // create interrupt process
             var imgInterrupt = new Image();
             imgInterrupt.src = 'img_for_exe/interrupt.png';
             var objInterrupt = {
@@ -390,27 +347,18 @@ function Visual() {
                     storageTact: 4
                 }
             };
-
-            // 20 cube in block for cube
-            // 4 program on block for program
             btnInterrupt = document.getElementById('interrupt-button');
             var blockTactCube = document.getElementById('tact-cube');
             arrayColorOfTactCubes = blockTactCube.getElementsByClassName('one-tact-cube');
             countTactCubes = arrayColorOfTactCubes.length;
-            // console.log(arrayColorOfTactCubes);
             var blockTactProgram = document.getElementById('tact-program');
             arrayOfListNamePrograms = blockTactProgram.getElementsByClassName('one-tact-name-program');
             arrayOfListIconPrograms = blockTactProgram.getElementsByClassName('one-tact-ico-program');
             countNameAndIcons = arrayOfListNamePrograms.length;
-            // console.log(arrayOfListNamePrograms);
-            //  console.log(arrayOfListIconPrograms);
             for (var incColor = 0; incColor < countTactCubes; incColor++) {
                 arrayColorString[incColor] = whiteColor;
             }
-            // add event listener for button 'interrupt'
-            // click -> add new process (interrupt) after first process (currently running)
             btnInterrupt.addEventListener('click', function () {
-                // "process" interrupt
                 objInterrupt.tact.counterTact = objInterrupt.tact.storageTact = Math.floor(Math.random() * 4) + 1;
                 if (arrayAllProcess.length > 1){
                     arrayAllProcess.splice(1, 0, objInterrupt);
@@ -423,32 +371,20 @@ function Visual() {
         };
 
         this.initPlay = function () {
-            //  console.log(arrayAllProcess);
-            // when one program in array
             if (arrayAllProcess.length > 1) {
                 return;
             }
-            // when appeared process
-            // run counter
-            // first fill all tact blocks
             pointerToInterval = setInterval(runAnimation, 1000);
             runAnimation();
         };
 
         var runAnimation = function () {
-            // console.log(arrayAllProcess);
-            /*
-             * самый простой алгоритм оказался самым удачным
-             * выводи только то что есть - не более
-             * */
-
             if (arrayAllProcess.length === 0){
                 objAnimationTact.endPlay();
                 return;
             }
 
             var firstProgramForAnimation = arrayAllProcess[0];
-            // new process for animation work
             if (firstProgramForAnimation.tact.counterTact === firstProgramForAnimation.tact.storageTact && firstProgramForAnimation.normName !== 'INTERRUPT'){
                 objAnimationProgram.endAnimation();
                 objAnimationProgram.initWorkProgram(firstProgramForAnimation.tact.storageTact * 1000, firstProgramForAnimation.normName);
@@ -467,7 +403,6 @@ function Visual() {
                 }
             }
 
-            //output all color
             for (var incColor = 0; incColor < countTactCubes; incColor++) {
                 arrayColorOfTactCubes[incColor].style.backgroundColor = arrayColorString[incColor];
             }
@@ -509,13 +444,9 @@ function Visual() {
             var firstProcess = arrayAllProcess[0];
             firstProcess.tact.counterTact -= 1;
             if (firstProcess.tact.counterTact < 1) {
-                // if this element == interrupt -> delete
                 if (firstProcess.normName === 'INTERRUPT') {
-                    // delete this "process"
                     arrayAllProcess.splice(0, 1);
                 } else {
-                    // if this process != interrupt
-                    // first element move to end of array
                     firstProcess.tact.counterTact = firstProcess.tact.storageTact;
                     arrayAllProcess.push(arrayAllProcess.shift());
                 }
@@ -535,15 +466,11 @@ function Visual() {
         };
     }
 
-    // show all program icons
     var addAllTagsPrograms = function () {
-        // pattern input element - ico of program
         var elementProgram = document.createElement('input');
         elementProgram.className = 'exe-icons';
         elementProgram.setAttribute('type', 'image');
-        // block with all programs
         var blockIco = document.getElementById('list-exe');
-        // add all programs
         for (var program in allPrograms) {
             if (allPrograms.hasOwnProperty(program)) {
                 var icoOfProgram = elementProgram.cloneNode(true);
@@ -556,115 +483,74 @@ function Visual() {
         }
     };
 
-    // click by ico in program block
     function runProgram(event) {
-        // this live element from bookmarks
         var targetElement = event.target.cloneNode(true);
-        // add event listener
         var nameProgram = targetElement.getAttribute('data-name-program');
-        // create process
         var process = {
             id: idProcess++,
             name: nameProgram,
             normName: allPrograms[nameProgram].name,
             context: allPrograms[nameProgram].context,
             objImage: allPrograms[nameProgram].objImage,
-            // element for delete
             elementInBookmarks: targetElement
         };
-        // put to bookmarks
         putToBookmarksBlock(process);
-        // put to array of process
         putProcessToRamOrSwap(process);
-        // init play animation for tact of process
         objAnimationTact.initPlay();
     }
 
-    // put program ico in bookmarks
     function putToBookmarksBlock(process) {
-        // get elementInBookmarks
         var elementInBookmarks = process.elementInBookmarks;
-        // add event listener
         elementInBookmarks.addEventListener('click', function () {
             showContext(process);
         });
-        // change class
         elementInBookmarks.className = 'exe-icon-in-bookmark';
-        // get bookmarks of context
         var bookmarkElement = document.getElementById('bookmarks-of-context');
         bookmarkElement.appendChild(elementInBookmarks);
-        // immediately show context
         elementInBookmarks.click();
     }
 
-    // put process to ram or swap
     function putProcessToRamOrSwap(process) {
-        // put to RAM
         if (!objRam.setProcess(process)) {
-            // put to SWAP
             if (!objSwap.setProcess(process)) {
-                //console.log('Нет места для программ');
                 return;
             }
         }
-        // add to common array
-        // create storage variable for countTact
         process.tact = {
             counterTact: process.context.countTact,
             storageTact: process.context.countTact,
             color: objHelper.getRandomColor()
         };
         arrayAllProcess.push(process);
-        //console.log('after - add new property');
-        //console.log(process);
-        //console.log(objRam);
-        //console.log(objSwap);
     }
 
-    // click by 'STOP process'
     function stopProcess(process) {
-        // console.log('process for stop -> ');
-        // console.log(process);
-        // make action next ico in bookmarks
         var elementIco = process.elementInBookmarks;
-        // check next sibling
         if (elementIco.nextElementSibling) {
             var nextProgram = elementIco.nextElementSibling;
-            // console.log('next programm ->');
-            // console.log(nextProgram);
             nextProgram.click();
         } else if (elementIco.previousElementSibling) {
             var nextProgram = elementIco.previousElementSibling;
             nextProgram.click();
         } else {
-            // no program
             objAnimationTact.endPlay();
             cleanBlockTextContext();
-            // end last animation process in ASM
             objAnimationProgram.endAnimation();
         }
         elementIco.parentNode.removeChild(elementIco);
-
-        //delete from arrayProcess
         deleteProcessFromRawOrSwap(process);
     }
 
-    // delete process from ram or swap
     function deleteProcessFromRawOrSwap(process) {
         if (!objRam.deleteProcess(process)) {
             if (!objSwap.deleteProcess(process)) {
                 console.log('Неоткуда удлять процесс');
             }
         }
-        // delete from common array
         arrayAllProcess.deleteProcess(process);
-        //  console.log(objRam);
-        //  console.log(objSwap);
     }
 
-    // make for active ico - opacity == 1
     function makeActiveIcoFromBookmarks(elementInBookmarks) {
-        // disable previous ico
         if (activeIcoForShowContext) {
             activeIcoForShowContext.style.opacity = 0.3;
         }
@@ -672,55 +558,37 @@ function Visual() {
         activeIcoForShowContext = elementInBookmarks;
     }
 
-    // remove all children from text block
     function cleanBlockTextContext() {
         var blockTextContext = document.getElementById('text-context');
-        // to clean block blockTextContext
         while (blockTextContext.firstElementChild) {
             blockTextContext.removeChild(blockTextContext.firstElementChild);
         }
     }
 
-    // show full context about process
     function showContext(process) {
-        // make opacity == 1
-        // console.log(process);
-        // console.log('show above');
         makeActiveIcoFromBookmarks(process.elementInBookmarks);
         var contextProgram = process.context;
-        var blockTextContext = document.getElementById('text-context');
-        // to clean block blockTextContext
         cleanBlockTextContext();
-        ///////////////////////////////////////////////////////////
-        // button - stop process
         var buttonStopProcess = document.createElement('p');
         buttonStopProcess.innerHTML = 'Остановить процесс';
         buttonStopProcess.className = 'stop-process';
         buttonStopProcess.addEventListener('click', function () {
             stopProcess(process);
         });
-        ///////////////////////////////////////////////////////
-        // count thread and memory
         var countThreadElement = document.createElement('p');
         countThreadElement.className = 'count-tread-memory';
         countThreadElement.innerHTML = 'Количество потоков: ' + contextProgram.numberThread;
         var sizeMemoryElement = document.createElement('p');
         sizeMemoryElement.className = 'count-tread-memory';
         sizeMemoryElement.innerHTML = 'Занимает памяти: ' + contextProgram.sizeMemory + ' (Mb), ' + contextProgram.countTact + ' такта(ов)';
-        ////////////////////////////////////////////////////////
-        // show block - modules
-        // block modules + TITLE
         var outerBlockModuleAndHidden = document.createElement('div');
         outerBlockModuleAndHidden.className = 'module-and-title-block';
-        // list modules title
         var blockTitleListOfModules = document.createElement('div');
         blockTitleListOfModules.className = 'title-list-modules';
         blockTitleListOfModules.innerHTML = 'Подключенные модули';
-        // block modules
         var blockModules = document.createElement('div');
         blockModules.className = 'module-with-list';
         blockModules.style.display = 'block';
-        // create list all modules
         var generalTagListModules = document.createElement('ul');
         generalTagListModules.id = 'ul-modules';
         var arrayModules = contextProgram.modules;
@@ -732,34 +600,25 @@ function Visual() {
             generalTagListModules.appendChild(elementLi);
         }
         blockModules.appendChild(generalTagListModules);
-        // add block module and hidden-block to outerBlockModuleAndHidden
         outerBlockModuleAndHidden.appendChild(blockTitleListOfModules);
         outerBlockModuleAndHidden.appendChild(blockModules);
         blockTextContext.appendChild(buttonStopProcess);
         blockTextContext.appendChild(countThreadElement);
         blockTextContext.appendChild(sizeMemoryElement);
         blockTextContext.appendChild(outerBlockModuleAndHidden);
-        ////////////////////////////////////////////////////////////////////
-        // show block virtual memory
-        // description column info about virtual memory
         var descriptionColumn = ['Баз. адрес', "Тип", "Состояние", "Защита"];
-        // full block
         var blockVirtualMemory = document.createElement('div');
         blockVirtualMemory.className = 'block-virtual-memory';
-        // full table
         var tableVirtualMemory = document.createElement('table');
         tableVirtualMemory.className = 'table-virtual-memory';
         var countColumn = descriptionColumn.length;
-        // add headers
         var headerRow = document.createElement('tr');
         for (var incNameColumn = 0; incNameColumn < countColumn; incNameColumn++) {
             var column = document.createElement('th');
             column.innerHTML = descriptionColumn[incNameColumn];
             headerRow.appendChild(column)
         }
-        // append header
         tableVirtualMemory.appendChild(headerRow);
-        // add other rows
         var arrayRows = contextProgram.virtualMemory;
         var countRows = arrayRows.length;
         for (var incRow = 0; incRow < countRows; incRow++) {
@@ -776,22 +635,17 @@ function Visual() {
         blockModules.style.height = blockModules.offsetHeight + 'px';
     }
 
-    // add event listener for dispatcher device
     var addEventListenerForDispatcherDevice = function () {
         var generalOuterBlock = document.getElementById('system-dispatcher');
         var arrayBlockOptions = generalOuterBlock.getElementsByClassName('option-device');
         var arrayBlockForDiagram = generalOuterBlock.getElementsByClassName('outer-block-for-canvas');
-        // array function for show
         var arrayFunctionForOptions = [showHddMemory, showRamMemory, showProcessLive, showSwapMemory];
-        // countOptions === countBlocks
         var countOptions = arrayBlockOptions.length;
-        // add event listener
         for (var incOption = 0; incOption < countOptions; incOption++) {
             arrayBlockOptions[incOption].addEventListener('click',
                 (function () {
                     var numberOption = incOption;
                     return (function () {
-                        //  console.log('click ->' + numberOption);
                         for (var incBlockForDiagram = 0; incBlockForDiagram < countOptions; incBlockForDiagram++) {
                             arrayBlockForDiagram[incBlockForDiagram].style.display = 'none';
                             arrayBlockOptions[incBlockForDiagram].style.backgroundColor = 'burlywood';
@@ -805,7 +659,6 @@ function Visual() {
         }
     };
 
-    // get value about process for diagram
     function getGenericDataPoints(objMemory) {
         var listProcess = objMemory.process;
         var genericDataPoints = [];
